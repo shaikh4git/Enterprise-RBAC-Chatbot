@@ -1,5 +1,10 @@
 FROM python:3.11-slim
 
+# Apply current security updates to the Debian packages in the base image.
+RUN apt-get update \
+    && apt-get upgrade -y --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/*
+
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
@@ -29,11 +34,4 @@ EXPOSE 85005
 
 USER 10001
 
-CMD [
-    "streamlit",
-    "run",
-    "app/app.py",
-    "--server.address=0.0.0.0",
-    "--server.port=8505",
-    "--server.headless=true"
-]
+CMD ["streamlit", "run", "app/app.py","--server.address=0.0.0.0","--server.port=8505","--server.headless=true"]
