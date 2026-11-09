@@ -30,7 +30,7 @@ RUN pip install \
 COPY --chown=10001:10001 app/ ./app/
 
 # Streamlit port.
-EXPOSE 85005
+EXPOSE 8505
 
 USER 10001
 
