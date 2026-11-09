@@ -1,0 +1,11 @@
+streamlit
+langchain-core
+langchain-groq
+langchain-qdrant
+langchain-huggingface
+langchain-text-splitters
+qdrant-client
+sentence-transformers
+docling
+bcrypt
+langsmith

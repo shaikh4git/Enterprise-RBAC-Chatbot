@@ -1,0 +1,15 @@
+.git
+.github
+.venv
+venv
+__pycache__
+.pytest_cache
+.env
+.env.*
+.streamlit/secrets.toml
+
+# Keep private documents out of the application image.
+documents/
+
+*.pyc
+.DS_Store
