@@ -29,6 +29,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # ------------------------------------------------
+      # Checkout application repository
+      # ------------------------------------------------
+
+      - name: Free disk space
+        run: |
+          sudo rm -rf /usr/share/dotnet /opt/ghc /usr/local/lib/android /opt/hostedtoolcache
+          docker system prune -af
+          df -h
 
       # ------------------------------------------------
       # Checkout application repository
