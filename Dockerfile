@@ -14,7 +14,8 @@ RUN useradd --create-home --uid 10001 --shell /usr/sbin/nologin appuser
 
 COPY requirements.txt .
 RUN --mount=type=cache,target=/root/.cache/pip \
-    pip install -r requirements.txt
+    pip install torch --index-url https://download.pytorch.org/whl/cpu \
+ && pip install -r requirements.txt
 
 COPY --chown=10001:10001 app/ ./app/
 EXPOSE 8505
