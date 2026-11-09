@@ -1,0 +1,181 @@
+name: Enterprise RBAC Chatbot CI
+
+on:
+  push:
+    branches:
+      - main
+
+    paths:
+      - "app/**"
+      - "tests/**"
+      - "requirements.txt"
+      - "Dockerfile"
+      - ".github/workflows/chatbot-ci.yaml"
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  IMAGE_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/enterprise-rbac-chatbot
+
+  IMAGE_TAG: sha-${{ github.sha }}
+
+jobs:
+
+  build-test-deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # ------------------------------------------------
+      # Checkout application repository
+      # ------------------------------------------------
+
+      - name: Checkout application
+        uses: actions/checkout@v4
+
+
+      # ------------------------------------------------
+      # Python setup
+      # ------------------------------------------------
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+
+        with:
+          python-version: "3.11"
+
+
+      # ------------------------------------------------
+      # Install dependencies
+      # ------------------------------------------------
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+
+          pip install -r requirements-dev.txt
+
+
+      # ------------------------------------------------
+      # Run RBAC tests
+      # ------------------------------------------------
+
+      - name: Run RBAC tests
+        env:
+          PYTHONPATH: app
+
+        run: |
+          pytest -v tests/
+
+
+      # ------------------------------------------------
+      # Docker Buildx
+      # ------------------------------------------------
+
+      - name: Setup Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+
+      # ------------------------------------------------
+      # Docker Hub login
+      # ------------------------------------------------
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+
+      # ------------------------------------------------
+      # Build image
+      # ------------------------------------------------
+
+      - name: Build chatbot image
+        run: |
+          docker build \
+            -t $IMAGE_NAME:$IMAGE_TAG \
+            .
+
+
+      # ------------------------------------------------
+      # Scan image
+      # ------------------------------------------------
+
+      - name: Trivy image scan
+        uses: aquasecurity/trivy-action@0.28.0
+
+        with:
+          image-ref: ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+
+          format: table
+
+          exit-code: "1"
+
+          ignore-unfixed: true
+
+          severity: CRITICAL,HIGH
+
+
+      # ------------------------------------------------
+      # Push image
+      # ------------------------------------------------
+
+      - name: Push image
+        run: |
+          docker push $IMAGE_NAME:$IMAGE_TAG
+
+
+      # ------------------------------------------------
+      # Checkout GitOps repository
+      # ------------------------------------------------
+
+      - name: Checkout GitOps repository
+        uses: actions/checkout@v4
+
+        with:
+          repository: ${{ vars.GITOPS_REPOSITORY }}
+
+          token: ${{ secrets.GITOPS_TOKEN }}
+
+          path: gitops
+
+
+      # ------------------------------------------------
+      # Update image tag in GitOps repository
+      # ------------------------------------------------
+
+      - name: Update GitOps image tag
+        run: |
+
+          sed -i \
+            "s/newTag: .*/newTag: ${IMAGE_TAG}/" \
+            gitops/app/kustomization.yaml
+
+
+      # ------------------------------------------------
+      # Commit GitOps change
+      # ------------------------------------------------
+
+      - name: Commit GitOps update
+        run: |
+
+          cd gitops
+
+          git config user.name "github-actions[bot]"
+
+          git config user.email \
+            "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add app/kustomization.yaml
+
+          git commit \
+            -m "Deploy chatbot image ${IMAGE_TAG}"
+
+          git push
