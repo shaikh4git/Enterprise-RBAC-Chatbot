@@ -30,7 +30,7 @@ jobs:
 
     steps:
       # ------------------------------------------------
-      # Checkout application repository
+      # Checkout application repository!!!
       # ------------------------------------------------
 
       - name: Free disk space
@@ -40,7 +40,7 @@ jobs:
           df -h
 
       # ------------------------------------------------
-      # Checkout application repository
+      # Checkout application repository!!!
       # ------------------------------------------------
 
       - name: Checkout application
