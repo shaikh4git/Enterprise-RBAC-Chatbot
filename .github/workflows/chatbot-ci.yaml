@@ -20,7 +20,7 @@ permissions:
 env:
   IMAGE_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/enterprise-rbac-chatbot
 
-  IMAGE_TAG: sha-${{ github.sha }}
+  #IMAGE_TAG: sha-${{ github.sha }}
 
 jobs:
 
@@ -108,6 +108,8 @@ jobs:
 
       - name: Build chatbot image
         run: |
+          IMAGE_TAG=$(git rev-parse --short=7 HEAD)
+          echo "Building image with tag: $IMAGE_TAG"
           docker build \
             -t $IMAGE_NAME:$IMAGE_TAG \
             .
