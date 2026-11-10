@@ -158,7 +158,12 @@ jobs:
           sed -i \
             "s/newTag: .*/newTag: ${IMAGE_TAG}/" \
             gitops/app/kustomization.yaml
+          echo "Updated GitOps image tag to the kustomization.yaml: $IMAGE_TAG"
 
+          sed -i \
+            "s/newTag: .*/newTag: ${IMAGE_TAG}/" \
+            gitops/app/rollout.yaml
+          echo "Updated GitOps image tag to the rollout.yaml: $IMAGE_TAG"
 
       # ------------------------------------------------
       # Commit GitOps change
