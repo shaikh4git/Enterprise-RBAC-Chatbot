@@ -20,7 +20,7 @@ st.title(
 )
 
 st.caption(
-    "Secure, department-aware enterprise knowledge assistant"
+    "Enterprise RBAC Chatbot - Version 2.0"
 )
 
 
