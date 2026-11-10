@@ -8,7 +8,7 @@ import bcrypt
 
 def load_users():
     """
-    Load the user directory from an environment variable.
+    Load the user directory from an environment variable.!
     """
 
     users_json = os.getenv(
