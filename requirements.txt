@@ -11,3 +11,5 @@ bcrypt
 langsmith
 argon2-cffi
 sentence-transformers
+transformers
+torch
