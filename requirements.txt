@@ -4,7 +4,7 @@ langchain-groq
 langchain-qdrant
 langchain-huggingface
 langchain-text-splitters
-qdrant-client
+qdrant-client==1.14.3
 sentence-transformers
 docling
 bcrypt

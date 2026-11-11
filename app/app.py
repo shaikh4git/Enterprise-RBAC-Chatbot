@@ -7,6 +7,8 @@ from auth import authenticate
 
 from chatbot import answer_question
 
+import traceback
+
 
 st.set_page_config(
     page_title="Enterprise RBAC Chatbot",
@@ -176,17 +178,21 @@ if query:
 
             try:
 
+
                 answer, sources = answer_question(
                     query,
-                    user,
+                    st.session_state.user,
                 )
 
             except Exception:
+                st.error("The chatbot encountered an unexpected error.") # temp
+                st.code(traceback.format_exc(),language="python",) # Temp
+                raise # temp
 
-                answer = (
-                    "The chatbot encountered an "
-                    "unexpected error. Please try again."
-                )
+               # answer = (
+                #    "The chatbot encountered an "
+                 #   "unexpected error. Please try again."
+                #)
 
                 sources = []
 
