@@ -1,5 +1,5 @@
 # Step 8: Create the document ingestion pipeline
-# This script reads the department folders, extracts document content, creates chunks, and inserts them into Qdrant.
+# This script reads the department folders, extracts document content, creates chunks, and inserts them into Qdrant.ok
 
 import os
 
