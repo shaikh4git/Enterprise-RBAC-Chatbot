@@ -10,3 +10,4 @@ docling
 bcrypt
 langsmith
 argon2-cffi
+sentence-transformers
