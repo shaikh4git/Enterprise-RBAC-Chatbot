@@ -293,7 +293,7 @@ def main():
             embeddings,
             url=QDRANT_URL,
             collection_name=COLLECTION_NAME,
-            force_recreate=False,
+            force_recreate=True,
         )
 
     else:
