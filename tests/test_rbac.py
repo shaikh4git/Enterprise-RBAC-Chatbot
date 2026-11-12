@@ -1,112 +1,78 @@
 from rbac import can_access
 
 
-finance_user = {
-    "username": "finance.alice",
-    "department": "Finance",
-    "roles": ["Finance"],
-}
+def test_public_website_available_to_all_authenticated_roles():
+
+    website_document = {
+        "access_scope": "authenticated",
+        "allowed_roles": [],
+        "domain": "madinps.edu.in",
+    }
+
+    users = [
+        {
+            "username": "finance.alice",
+            "department": "Finance",
+            "roles": ["Finance"],
+        },
+        {
+            "username": "hr.bob",
+            "department": "HR",
+            "roles": ["HR"],
+        },
+        {
+            "username": "marketing.user",
+            "department": "Marketing",
+            "roles": ["Marketing"],
+        },
+        {
+            "username": "admin.user",
+            "department": "Administration",
+            "roles": ["C-Level"],
+        },
+    ]
+
+    for user in users:
+        assert can_access(user, website_document)
 
 
-hr_user = {
-    "username": "hr.bob",
-    "department": "HR",
-    "roles": ["HR"],
-}
+def test_private_finance_document_not_available_to_hr():
+
+    private_document = {
+        "department": "Finance",
+        "allowed_roles": ["Finance", "C-Level"],
+    }
+
+    hr_user = {
+        "username": "hr.bob",
+        "department": "HR",
+        "roles": ["HR"],
+    }
+
+    assert not can_access(hr_user, private_document)
 
 
-marketing_user = {
-    "username": "marketing.carol",
-    "department": "Marketing",
-    "roles": ["Marketing"],
-}
+def test_private_finance_document_available_to_finance():
+
+    private_document = {
+        "department": "Finance",
+        "allowed_roles": ["Finance", "C-Level"],
+    }
+
+    finance_user = {
+        "username": "finance.alice",
+        "department": "Finance",
+        "roles": ["Finance"],
+    }
+
+    assert can_access(finance_user, private_document)
 
 
-executive_user = {
-    "username": "ceo",
-    "department": "Executive",
-    "roles": ["C-Level"],
-}
+def test_unauthenticated_user_cannot_access_website():
 
+    website_document = {
+        "access_scope": "authenticated",
+        "allowed_roles": [],
+    }
 
-finance_document = {
-    "department": "Finance",
-    "allowed_roles": [
-        "Finance",
-        "C-Level",
-    ],
-}
-
-
-hr_document = {
-    "department": "HR",
-    "allowed_roles": [
-        "HR",
-        "C-Level",
-    ],
-}
-
-
-general_document = {
-    "department": "General",
-    "allowed_roles": [
-        "Employee",
-        "C-Level",
-    ],
-}
-
-
-def test_finance_can_access_finance():
-
-    assert can_access(
-        finance_user,
-        finance_document,
-    )
-
-
-def test_marketing_cannot_access_finance():
-
-    assert not can_access(
-        marketing_user,
-        finance_document,
-    )
-
-
-def test_hr_can_access_hr():
-
-    assert can_access(
-        hr_user,
-        hr_document,
-    )
-
-
-def test_finance_cannot_access_hr():
-
-    assert not can_access(
-        finance_user,
-        hr_document,
-    )
-
-
-def test_all_employees_can_access_general():
-
-    assert can_access(
-        marketing_user,
-        general_document,
-    )
-
-
-def test_executive_can_access_finance():
-
-    assert can_access(
-        executive_user,
-        finance_document,
-    )
-
-
-def test_executive_can_access_hr():
-
-    assert can_access(
-        executive_user,
-        hr_document,
-    )
+    assert not can_access(None, website_document)

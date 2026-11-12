@@ -1,16 +1,9 @@
-# Step 3: Implement role-based access control (RBAC)
-# This file is the core authorisation logic.
+# Role-Based Access Control (RBAC)
 
 def effective_roles(user):
-    """
-    Return the user's effective roles.
-
-    Every authenticated user receives the Employee role
-    and their assigned department role.
-    """
+    """Return the authenticated user's effective roles."""
 
     roles = set(user.get("roles", []))
-
     roles.add("Employee")
 
     department = user.get("department")
@@ -23,21 +16,26 @@ def effective_roles(user):
 
 def can_access(user, metadata):
     """
-    Check whether a user can access a document.
+    Public website documents are accessible to every
+    authenticated user.
 
-    Default behavior: deny access if the document
-    does not contain explicit allowed_roles metadata.
+    Private documents still require an allowed_roles match.
     """
 
-    allowed_roles = set(
-        metadata.get("allowed_roles", [])
-    )
+    if not user or not user.get("username"):
+        return False
+
+    # Public website content: login is required,
+    # but no particular department role is required.
+    if metadata.get("access_scope") == "authenticated":
+        return True
+
+    # Existing department-level authorization.
+    allowed_roles = set(metadata.get("allowed_roles", []))
 
     if not allowed_roles:
         return False
 
     user_roles = effective_roles(user)
 
-    return bool(
-        user_roles.intersection(allowed_roles)
-    )
+    return bool(user_roles.intersection(allowed_roles))

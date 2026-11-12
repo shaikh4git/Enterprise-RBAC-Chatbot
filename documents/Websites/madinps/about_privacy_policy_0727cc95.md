@@ -1,0 +1,75 @@
+<!--
+source_url: https://madinps.edu.in/about/privacy-policy/
+domain: madinps.edu.in
+crawled_at: 2026-11-12T02:10:52.731944+00:00
+-->
+
+# Privacy Policy – Madin Public School
+
+Source: https://madinps.edu.in/about/privacy-policy/
+
+Crawled at: 2026-11-12T02:10:52.731944+00:00
+
+---
+
+Madin Public School
+Privacy Policy
+Read More
+This Privacy Policy governs the manner in which Madin Public School collects, uses, maintains and discloses information collected from users (each, a “User”) of the www.madinps.edu.in website (“Site”). This privacy policy applies to the Site and all products and services offered by Madin Public School.
+Personal identification information
+We may collect personal identification information from Users in a variety of ways, including, but not limited to, when Users visit our site, register on the site, place an order, subscribe to the newsletter, fill out a form, and in connection with other activities, services, features or resources we make available on our Site. Users may be asked for, as appropriate, name, email address, phone number. Users may, however, visit our Site anonymously. We will collect personal identification information from Users only if they voluntarily submit such information to us. Users can always refuse to supply personal identification information, except that it may prevent them from engaging in certain Site related activities.
+Non-personal identification information
+We may collect non-personal identification information about Users whenever they interact with our Site. Non-personal identification information may include the browser name, the type of computer and technical information about Users means of connection to our Sites, such as the operating system and the Internet service providers utilized and other similar information.
+Web browser cookies
+Our Site may use “cookies” to enhance User experience. User’s web browser places cookies on their hard drive for record-keeping purposes and sometimes to track information about them. User may choose to set their web browser to refuse cookies or to alert you when cookies are being sent. If they do so, note that some parts of the Site may not function properly.
+How we use collected information
+Madin Public School may collect and use Users personal information for the following purposes:
+To improve customer service
+Information you provide helps us respond to your customer service requests and support needs more efficiently.
+To personalize user experience
+We may use information in the aggregate to understand how our Users as a group use the services and resources provided on our Site.
+To improve our Site
+We may use feedback you provide to improve our products and services.
+To process payments
+We may use the information Users provide about themselves when placing an order only to provide service to that order. We do not share this information with outside parties except to the extent necessary to provide the service.
+To send periodic emails
+We may use the email address to send User information and updates pertaining to their order. It may also be used to respond to their inquiries, questions, and/or other requests. If User decides to opt-in to our mailing list, they will receive emails that may include company news, updates, related product or service information, etc. If at any time the User would like to unsubscribe from receiving future emails, we include detailed unsubscribe instructions at the bottom of each email or User may contact us via our Site.
+Access, Rectification and Deletion of data
+In order to provide an option to resume the use of our services at a later date, we may retain personal data associated with inactive accounts for up to 24 months from the date of last activity on that account. Users with an active account may access, modify, rectify and delete personal information at any time through their account. Users without an active account may send an email to admin@madinps.edu.in to request for access, rectification or deletion of their personal data. We may refuse to delete or modify your data if we need that data to protect our legal rights or to perform our legal obligations.
+Other rights
+In addition to the rights mentioned in the previous section, Users also have the right to restrict processing of their data, to object to the processing of the data, as well as the right to data portability. We will cooperate with Users to fulfil these rights as far as possible.
+How we protect your information
+We adopt appropriate data collection, storage and processing practices and security measures to protect against unauthorized access, alteration, disclosure or destruction of your personal information, username, password, transaction information and data stored on our Site.
+Sharing your personal information
+We do not sell, trade, or rent Users personal identification information to others. We may share generic aggregated demographic information not linked to any personal identification information regarding visitors and users with our business partners, trusted affiliates and advertisers for the purposes outlined above.We may use third party service providers to help us operate our business and the Site or administer activities on our behalf, such as sending out newsletters or surveys. We may share your information with these third parties for those limited purposes provided that you have given us your permission.
+Third party websites
+Users may find advertising or other content on our Site that link to the sites and services of our partners, suppliers, advertisers, sponsors, licensors and other third parties. We do not control the content or links that appear on these sites and are not responsible for the practices employed by websites linked to or from our Site. In addition, these sites or services, including their content and links, may be constantly changing. These sites and services may have their own privacy policies and customer service policies. Browsing and interaction on any other website, including websites which have a link to our Site, is subject to that website’s own terms and policies.
+Children’s privacy
+Children of any age who are known to basic system functions can use this application. There is no age restriction for using this application.
+Changes to this privacy policy
+Madin Public School has the discretion to update this privacy policy at any time. When we do, we will revise the updated date at the bottom of this page. We encourage Users to frequently check this page for any changes to stay informed about how we are helping to protect the personal information we collect. You acknowledge and agree that it is your responsibility to review this privacy policy periodically and become aware of modifications.
+Your acceptance of these terms
+In order to use this Site, you must accept this policy and our accompanying terms of service. If you do not agree to this policy or the terms of service, please do not use our Site. Your continued use of the Site following the posting of changes to this policy will be deemed your acceptance of those changes. Provision of personal data to us under this policy is essential for us to be able to provide our services to you. Failure to provide correct and complete information to us could result in unintentional failure to provide complete and proper services to you. You may revoke your consent at any time by sending an email to admin@madinps.edu.in. Revoking your consent would result in the deletion of your account including irrevocable loss of all data related to your account.
+Fee Refund and Cancellation Policy
+School fees (including Admission Fees, Tuition Fees, etc.) once paid are strictly
+non-refundable and non-transferable
+under normal circumstances.
+Refunds will only be processed in cases of
+technical errors, duplicate transactions, or excess payments
+made due to network/system issues during the payment process.
+In case of any duplicate or excess payment:
+Parents/Guardians must notify the school via email at
+info@madinps.edu.in
+within
+7 working days
+of the transaction, providing the Student Name, Admission Number, Payment Date, Transaction ID, and Proof of Payment.
+Upon verification by the accounts department, any approved excess amount will be refunded to the original payment source within
+7 to 14 working days
+Once an online payment transaction is successfully completed, it cannot be canceled or charged back by the user
+How to contact us and how to complain
+If you have any questions or comments about this Privacy Policy, the practices of this site, or your dealings with this site, we request you to please contact us at:
+Madin Public School, which operates under the MADINU SSAQUAFATHIL ISLAMIYYA
+Swalath Nagar, Melmuri
+Malappuram – 676517
+info@madinps.edu.in
+Read more

@@ -4,25 +4,39 @@
 import streamlit as st
 
 from auth import authenticate
-
 from chatbot import answer_question
-
 import traceback
 
-
 st.set_page_config(
-    page_title="Enterprise RBAC Chatbot",
-    page_icon="🔐",
+    page_title="Ma'din Public School Assistant",
+    page_icon="🎓",
     layout="wide",
 )
 
 
-st.title(
-    "🔐 Enterprise RBAC Chatbot"
-)
+def display_sources(sources):
+    """Display clickable source references."""
+
+    if not sources:
+        return
+
+    st.caption("Information sources:")
+
+    for source in sources:
+        if source.startswith(("https://", "http://")):
+            st.markdown(
+                f"- [{source}]({source})"
+            )
+        else:
+            st.markdown(f"- {source}")
+
+
+st.title("🎓 Ma'din Public School Assistant")
 
 st.caption(
-    "Enterprise RBAC Chatbot - Version 2.0"
+    "Ask questions about admissions, academics, "
+    "facilities, school activities, and other public "
+    "school information."
 )
 
 
@@ -31,30 +45,23 @@ st.caption(
 # --------------------------------------------------
 
 if "user" not in st.session_state:
-
     st.session_state.user = None
 
 
 if not st.session_state.user:
 
-    st.subheader(
-        "Employee Login"
-    )
+    st.subheader("User Login")
 
     with st.form("login_form"):
 
-        username = st.text_input(
-            "Username",
-        )
+        username = st.text_input("Username")
 
         password = st.text_input(
             "Password",
             type="password",
         )
 
-        submitted = st.form_submit_button(
-            "Login",
-        )
+        submitted = st.form_submit_button("Login")
 
     if submitted:
 
@@ -64,16 +71,11 @@ if not st.session_state.user:
         )
 
         if user:
-
             st.session_state.user = user
-
             st.rerun()
 
         else:
-
-            st.error(
-                "Invalid username or password."
-            )
+            st.error("Invalid username or password.")
 
     st.stop()
 
@@ -84,10 +86,7 @@ if not st.session_state.user:
 
 user = st.session_state.user
 
-
-st.sidebar.title(
-    "Employee Information"
-)
+st.sidebar.title("Account Information")
 
 st.sidebar.write(
     f"User: {user['username']}"
@@ -101,13 +100,14 @@ st.sidebar.write(
     f"Roles: {', '.join(user['roles'])}"
 )
 
+st.sidebar.success(
+    "Access to public school website information enabled."
+)
 
-if st.sidebar.button(
-    "Logout",
-):
+
+if st.sidebar.button("Logout"):
 
     st.session_state.user = None
-
     st.session_state.messages = []
 
     st.rerun()
@@ -118,28 +118,18 @@ if st.sidebar.button(
 # --------------------------------------------------
 
 if "messages" not in st.session_state:
-
     st.session_state.messages = []
 
 
 for message in st.session_state.messages:
 
-    with st.chat_message(
-        message["role"],
-    ):
+    with st.chat_message(message["role"]):
 
-        st.markdown(
-            message["content"],
+        st.markdown(message["content"])
+
+        display_sources(
+            message.get("sources", [])
         )
-
-        if message.get("sources"):
-
-            st.caption(
-                "Sources: "
-                + ", ".join(
-                    message["sources"]
-                )
-            )
 
 
 # --------------------------------------------------
@@ -147,7 +137,7 @@ for message in st.session_state.messages:
 # --------------------------------------------------
 
 query = st.chat_input(
-    "Ask a question about your company..."
+    "Ask anything about Ma'din Public School..."
 )
 
 
@@ -160,24 +150,16 @@ if query:
         }
     )
 
-    with st.chat_message(
-        "user",
-    ):
+    with st.chat_message("user"):
+        st.markdown(query)
 
-        st.markdown(
-            query,
-        )
-
-    with st.chat_message(
-        "assistant",
-    ):
+    with st.chat_message("assistant"):
 
         with st.spinner(
-            "Searching authorized company documents..."
+            "Searching Ma'din Public School website information..."
         ):
 
             try:
-
 
                 answer, sources = answer_question(
                     query,
@@ -185,29 +167,21 @@ if query:
                 )
 
             except Exception:
-                st.error("The chatbot encountered an unexpected error.") # temp
-                st.code(traceback.format_exc(),language="python",) # Temp
-                raise # temp
+                st.error(
+                    "The chatbot encountered an error. "
+                    "Please check the application logs."
+                )
 
-               # answer = (
-                #    "The chatbot encountered an "
-                 #   "unexpected error. Please try again."
-                #)
+                answer = (
+                    "I could not process your question "
+                    "at this time. Please try again."
+                )
 
                 sources = []
 
-        st.markdown(
-            answer,
-        )
+        st.markdown(answer)
 
-        if sources:
-
-            st.caption(
-                "Sources: "
-                + ", ".join(
-                    sources
-                )
-            )
+        display_sources(sources)
 
     st.session_state.messages.append(
         {

@@ -12,4 +12,5 @@ langsmith
 argon2-cffi
 sentence-transformers
 transformers
-torch
+requests
+beautifulsoup4
