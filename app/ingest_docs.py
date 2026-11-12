@@ -13,7 +13,7 @@ from langchain_core.documents import Document
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_qdrant import QdrantVectorStore
-
+from urllib.parse import urlparse
 from qdrant_client import QdrantClient
 from qdrant_client.models import (
     Filter,
@@ -37,6 +37,64 @@ COLLECTION_NAME = os.getenv(
 )
 
 WEBSITE_DOMAIN = "madinps.edu.in"
+ALLOWED_WEBSITE_PATHS = {
+    # Main school information
+    "/",
+    "/about/",
+    "/about-madin/",
+    "/vision-and-mission/",
+    "/principals-message/",
+    "/leadership-236/",
+    "/about/mandatory-public-disclosure/",
+    "/about/privacy-policy/",
+
+    # Admissions and academics
+    "/admission/",
+    "/academics/",
+    "/academics/academic-calendar/",
+    "/academics/school-transfer-certificate-tc/",
+    "/career/",
+
+    # Campus and facilities
+    "/campus/",
+    "/academic-facilities/",
+    "/boarding-facilities/",
+    "/healthcare-facilities/",
+    "/safety-and-security/",
+    "/digital-classroom/",
+    "/robotic-lab-stem-education/",
+    "/science-laboratory/",
+
+    # Student activities
+    "/activities/",
+    "/co-curriculars/",
+    "/football-club/",
+    "/skating-club/",
+    "/taekwondo-martial-arts/",
+
+    # Transport (public information; verify rates/routes)
+    "/transportation-facility/",
+
+    # Contact and public feedback
+    "/contact-us/",
+    "/testimonial/",
+
+    # School news and events
+    "/news/",
+    "/news-events/",
+    "/exhibition-organized-on-engineers-day/",
+    "/kiddiegala/",
+    "/election/",
+    "/madin-public-school-students-celebrate-student-police-cadet-day-with-enthusiasm/",
+    "/mobile-science-exhibition-sparks-curiosity-among-students/",
+    "/new-students-welcomed-with-sapling-distribution-at-madin-public-school/",
+    "/school-celebrates-77th-independence-day-with-message-of-unity-and-responsibility/",
+    "/school-embarks-on-new-academic-year-with-tilawa-quran-study-launch/",
+    "/successful-conclusion-of-three-day-artorium-at-school/",
+    "/visual-arts-and-science-exhibition/",
+    "/vlog/",
+}
+
 
 # Keep this false for the school-only knowledge base.
 # Set true only if you intentionally add private department documents.
@@ -110,6 +168,21 @@ def load_documents():
                 print(
                     f"Skipping website document without source URL: "
                     f"{relative_path}"
+                )
+                continue
+            # Validate the source domain.
+            parsed_url = urlparse(source_url)
+            if parsed_url.hostname != WEBSITE_DOMAIN:
+                print(f"Skipping external URL: {source_url}")
+                continue
+            # Normalize and validate the website path.
+            website_path = parsed_url.path or "/"
+            if not website_path.endswith("/"):
+                website_path += "/"
+
+            if website_path not in ALLOWED_WEBSITE_PATHS:
+                print(
+                    f"Skipping website document with disallowed path: {website_path}"
                 )
                 continue
 
