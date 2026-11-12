@@ -1,0 +1,63 @@
+2026-11-12 15:24:14.439 No ASGI app assignments found in /Users/shaikh/Learning/RBAC-ChatBot/Enterprise-RBAC-Chatbot/app/app.py
+2026-11-12 15:24:14.636 Filtered 155 packages down to 1 candidates for component scanning
+2026-11-12 15:24:14.636 Scanning 1 candidate packages for component manifests using 1 worker threads
+2026-11-12 15:24:14.647 Found 0 component manifests total
+2026-11-12 15:24:14.647 No asset roots to watch
+2026-11-12 15:24:14.647 File watching not started
+2026-11-12 15:24:14.648 Starting new event loop for server
+2026-11-12 15:24:14.648 Starting server...
+2026-11-12 15:24:14.695 Starting uvicorn server on :::8501
+2026-11-12 15:24:14.723 Runtime state: RuntimeState.INITIAL -> RuntimeState.NO_SESSIONS_CONNECTED
+2026-11-12 15:24:14.723 Uvicorn server started on :::8501
+
+  You can now view your Streamlit app in your browser.
+
+  Local URL: http://localhost:8501
+  Network URL: http://192.0.0.2:8501
+
+2026-11-12 15:24:14.727 Setting up signal handler
+2026-11-12 15:24:15.117 No singleton. Registering one.
+2026-11-12 15:24:15.142 Watcher created for /Users/shaikh/Learning/RBAC-ChatBot/Enterprise-RBAC-Chatbot/app/app.py
+2026-11-12 15:24:15.143 AppSession initialized (id=f4334a41-7c5a-4ede-8231-7404c7aa621d)
+2026-11-12 15:24:15.143 Created new session for client 4453452752. Session ID: f4334a41-7c5a-4ede-8231-7404c7aa621d
+2026-11-12 15:24:15.143 Runtime state: RuntimeState.NO_SESSIONS_CONNECTED -> RuntimeState.ONE_OR_MORE_SESSIONS_CONNECTED
+2026-11-12 15:24:15.163 Watcher created for /Users/shaikh/Learning/RBAC-ChatBot/Enterprise-RBAC-Chatbot/app/app.py
+2026-11-12 15:24:15.163 AppSession initialized (id=ed50073e-4ba0-489b-83ef-e03f3ac3805c)
+2026-11-12 15:24:15.163 Created new session for client 4453943312. Session ID: ed50073e-4ba0-489b-83ef-e03f3ac3805c
+2026-11-12 15:24:15.163 Runtime state: RuntimeState.ONE_OR_MORE_SESSIONS_CONNECTED -> RuntimeState.ONE_OR_MORE_SESSIONS_CONNECTED
+2026-11-12 15:24:15.164 Beginning script thread
+2026-11-12 15:24:15.164 Running script
+2026-11-12 15:24:15.164 Disconnecting files for session with ID ed50073e-4ba0-489b-83ef-e03f3ac3805c
+2026-11-12 15:24:15.164 Sessions still active: dict_keys([])
+2026-11-12 15:24:15.164 Files: 0; Sessions with files: 0
+2026-11-12 15:24:16.305 Removing orphaned files...
+2026-11-12 15:24:16.305 Removing orphaned deferred callables...
+2026-11-12 15:24:16.468 Watcher created for /Users/shaikh/Learning/RBAC-ChatBot/Enterprise-RBAC-Chatbot/app/auth.py
+2026-11-12 15:24:16.469 Watcher created for /Users/shaikh/Learning/RBAC-ChatBot/Enterprise-RBAC-Chatbot/app/rbac.py
+2026-11-12 15:24:16.470 Watcher created for /Users/shaikh/Learning/RBAC-ChatBot/Enterprise-RBAC-Chatbot/app/guardrails.py
+2026-11-12 15:24:16.470 Watcher created for /Users/shaikh/Learning/RBAC-ChatBot/Enterprise-RBAC-Chatbot/app/chatbot.py
+2026-11-12 15:24:17.054 Watcher created for /Users/shaikh/Learning/RBAC-ChatBot/Enterprise-RBAC-Chatbot/app/app.py
+2026-11-12 15:24:17.055 AppSession initialized (id=29afd038-ec38-4759-ac58-c43d3cc39ddd)
+2026-11-12 15:24:17.055 Created new session for client 4663448080. Session ID: 29afd038-ec38-4759-ac58-c43d3cc39ddd
+2026-11-12 15:24:17.055 Runtime state: RuntimeState.ONE_OR_MORE_SESSIONS_CONNECTED -> RuntimeState.ONE_OR_MORE_SESSIONS_CONNECTED
+2026-11-12 15:24:23.568 Beginning script thread
+2026-11-12 15:24:23.569 Running script
+2026-11-12 15:24:23.569 Disconnecting files for session with ID ed50073e-4ba0-489b-83ef-e03f3ac3805c
+2026-11-12 15:24:23.570 Sessions still active: dict_keys([])
+2026-11-12 15:24:23.571 Files: 0; Sessions with files: 0
+2026-11-12 15:24:23.580 Removing orphaned files...
+2026-11-12 15:24:23.580 Removing orphaned deferred callables...
+2026-11-12 15:24:29.108 Beginning script thread
+2026-11-12 15:24:29.109 Running script
+2026-11-12 15:24:29.109 Disconnecting files for session with ID ed50073e-4ba0-489b-83ef-e03f3ac3805c
+2026-11-12 15:24:29.109 Sessions still active: dict_keys([])
+2026-11-12 15:24:29.109 Files: 0; Sessions with files: 0
+2026-11-12 15:24:29.113 Removing orphaned files...
+2026-11-12 15:24:29.113 Removing orphaned deferred callables...
+2026-11-12 15:24:49.166 Beginning script thread
+2026-11-12 15:24:49.168 Running script
+2026-11-12 15:24:49.168 Disconnecting files for session with ID ed50073e-4ba0-489b-83ef-e03f3ac3805c
+2026-11-12 15:24:49.168 Sessions still active: dict_keys([])
+2026-11-12 15:24:49.168 Files: 0; Sessions with files: 0
+2026-11-12 15:24:49.183 Removing orphaned files...
+2026-11-12 15:24:49.184 Removing orphaned deferred callables...

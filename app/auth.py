@@ -1,5 +1,3 @@
-# Step 4: Implement authentication
-# We will use bcrypt password hashes and store the user configuration in a Kubernetes Secret.
 
 import os
 import json
@@ -7,36 +5,43 @@ import bcrypt
 
 
 def load_users():
-    """
-    Load the user directory from an environment variable.!
-    """
+    """Load users from the Kubernetes Secret environment variable."""
 
-    users_json = os.getenv(
-        "CHATBOT_USERS_JSON",
-        "{}",
-    )
+    users_json = os.getenv("CHATBOT_USERS_JSON", "{}")
 
-    return json.loads(users_json)
+    try:
+        users = json.loads(users_json)
+
+        if not isinstance(users, dict):
+            raise ValueError("User configuration must be a JSON object")
+
+        return users
+
+    except (json.JSONDecodeError, ValueError) as exc:
+        print(f"User configuration error: {exc}")
+        return {}
 
 
 def authenticate(username, password):
     """
     Authenticate a user using bcrypt.
 
-    Returns the authenticated user identity
-    or None if authentication fails.
+    Returns authenticated user identity or None.
     """
 
+    if not username or not password:
+        return None
+
     users = load_users()
+
+    username = username.strip().lower()
 
     user_record = users.get(username)
 
     if not user_record:
         return None
 
-    password_hash = user_record.get(
-        "password_hash"
-    )
+    password_hash = user_record.get("password_hash")
 
     if not password_hash:
         return None
@@ -47,7 +52,7 @@ def authenticate(username, password):
             password_hash.encode("utf-8"),
         )
 
-    except ValueError:
+    except (ValueError, TypeError):
         return None
 
     if not valid_password:
@@ -55,6 +60,6 @@ def authenticate(username, password):
 
     return {
         "username": username,
-        "department": user_record["department"],
-        "roles": user_record["roles"],
+        "department": user_record.get("department", ""),
+        "roles": user_record.get("roles", []),
     }

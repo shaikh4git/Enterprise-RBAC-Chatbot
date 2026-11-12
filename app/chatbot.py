@@ -135,7 +135,30 @@ def retrieve_documents(query, user):
     return authorized_documents
 
 
+
 def answer_question(query, user):
+
+    if not user or not user.get("username"):
+        raise PermissionError(
+            "Authentication is required."
+        )
+
+    greetings = {
+        "hi",
+        "hello",
+        "hey",
+        "good morning",
+        "good afternoon",
+        "good evening",
+    }
+
+    if query.strip().lower() in greetings:
+        return (
+            "Hello! I'm the Ma'din Public School assistant. "
+            "How can I help you with admissions, academics, "
+            "school facilities, or other school-related information?",
+            [],
+        )
 
     documents = retrieve_documents(
         query,
@@ -143,7 +166,6 @@ def answer_question(query, user):
     )
 
     if not documents:
-
         return (
             "I couldn't find information about this "
             "topic in the Ma'din Public School website "
@@ -212,18 +234,12 @@ def answer_question(query, user):
 
     response = llm.invoke(
         [
-            SystemMessage(
-                content=system_prompt,
-            ),
-            HumanMessage(
-                content=human_prompt,
-            ),
+            SystemMessage(content=system_prompt),
+            HumanMessage(content=human_prompt),
         ],
     )
 
-    answer = str(
-        response.content
-    )
+    answer = str(response.content)
 
     answer = apply_output_guardrails(
         answer,
