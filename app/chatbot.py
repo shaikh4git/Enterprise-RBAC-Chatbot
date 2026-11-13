@@ -268,12 +268,16 @@ def answer_question(query, user):
         user,
     )
 
-    sources = sorted(
-        {
-            document.metadata.get("url")
-            or document.metadata.get("source", "Unknown source")
-            for document in documents
-        }
+    # Use the highest-ranked retrieved document as the primary source.
+    # similarity_search returns documents in relevance order.
+
+    primary_document = documents[0]
+
+    primary_source = (
+        primary_document.metadata.get("url")
+        or primary_document.metadata.get("source")
     )
+
+    sources = [primary_source] if primary_source else []
 
     return answer, sources
