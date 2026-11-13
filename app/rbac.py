@@ -39,3 +39,5 @@ def can_access(user, metadata):
     user_roles = effective_roles(user)
 
     return bool(user_roles.intersection(allowed_roles))
+
+

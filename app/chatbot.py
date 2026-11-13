@@ -8,6 +8,7 @@
 # app/chatbot.py
 
 import os
+import logging
 
 import streamlit as st
 
@@ -40,7 +41,7 @@ from guardrails import (
     apply_output_guardrails,
 )
 
-
+logger = logging.getLogger(__name__)
 @st.cache_resource
 def get_embeddings():
 
@@ -118,7 +119,7 @@ def retrieve_documents(query, user):
 
     documents = vector_store.similarity_search(
         query,
-        k=6,
+        k=15,
         filter=qdrant_filter,
     )
 
@@ -187,8 +188,14 @@ def answer_question(query, user):
     You are the official information assistant for
     Ma'din Public School.
 
-    Answer questions using only the retrieved public
-    website content supplied in the context.
+    Answer questions using only the authorized
+    retrieved documents supplied in the context.
+
+    Respect the access restrictions already applied
+    by the application.
+
+    Do not assume that a user is authorized to access
+    information merely because it appears in the prompt.
 
     Follow these rules:
 
@@ -232,14 +239,28 @@ def answer_question(query, user):
         temperature=0,
     )
 
-    response = llm.invoke(
-        [
-            SystemMessage(content=system_prompt),
-            HumanMessage(content=human_prompt),
-        ],
-    )
+    try:
+        response = llm.invoke(
+            [
+                SystemMessage(content=system_prompt),
+                HumanMessage(content=human_prompt),
+            ],
+        )
 
-    answer = str(response.content)
+        answer = str(response.content)
+
+    except Exception:
+        # Log technical details for administrators.
+        # Do not expose exception details to chatbot users.
+        logger.exception(
+            "Groq API request failed while generating chatbot response."
+        )
+
+        return (
+            "I'm sorry, but I'm temporarily unable to generate "
+            "an answer due to a service issue. Please try again later.",
+            [],
+        )
 
     answer = apply_output_guardrails(
         answer,
