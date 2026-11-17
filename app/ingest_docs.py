@@ -287,7 +287,7 @@ def main():
             f"\nCreating new Qdrant collection: {COLLECTION_NAME}"
         )
 
-        # First ingestion: create the collection.
+        # First ingestion: create the collection.!!
         QdrantVectorStore.from_documents(
             chunks,
             embeddings,
