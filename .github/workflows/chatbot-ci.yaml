@@ -113,25 +113,27 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
 
-      # ------------------------------------------------
-      # Build image
-      # ------------------------------------------------
-
-      - name: Build chatbot image
-        run: |
-          echo "Building image: $IMAGE_NAME:$IMAGE_TAG"
-
-          docker build -t "$IMAGE_NAME:$IMAGE_TAG" .
 
       # ------------------------------------------------
-      # Push image
+      # Enable multi-platform builds
       # ------------------------------------------------
 
-      - name: Push image
-        run: |
-          echo "Pushing image: $IMAGE_NAME:$IMAGE_TAG"
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
 
-          docker push "$IMAGE_NAME:$IMAGE_TAG"
+      # ------------------------------------------------
+      # Build and push multi-platform image
+      # ------------------------------------------------
+
+      - name: Build and push chatbot image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+
 
       # ------------------------------------------------
       # Checkout GitOps repository
